@@ -1667,7 +1667,7 @@ prepareWebPrint=function(){
  root.prepend(resume);
  root.querySelectorAll('img').forEach(img=>{img.loading='eager';});
 };
-document.getElementById('statement-pdf').addEventListener('click',savePortfolioPDF);
+document.getElementById('statement-pdf').addEventListener('click',()=>document.getElementById('print-resume').click());
 
 window.addEventListener('beforeprint',prepareWebPrint);
 window.addEventListener('afterprint',()=>document.getElementById('pdf-export')?.remove());
