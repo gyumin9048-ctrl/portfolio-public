@@ -764,6 +764,7 @@ body>*:not(#pdf-export){display:none!important}
 #pdf-export .statement-lead{margin:0 0 24px;padding:22px;background:#f1f3f9;border:1px solid #e4e7ec;border-radius:12px}
 #pdf-export .statement-lead h3{font-size:22px;margin:8px 0}
 #pdf-export .pdf-footer{margin:22px 0 0;padding-top:12px;border-top:1px solid #e4e7ec;font-size:10px;color:#667085}
+#pdf-export .pdf-footer a,#pdf-export .pdf-project-link{color:#344bd0!important;text-decoration:underline!important;text-underline-offset:2px}
 #pdf-export .admin-actions,#pdf-export .editor-only,#pdf-export button,#pdf-export .lobby-actions,#pdf-export .statement-actions,#pdf-export .btn{display:none!important}
 #pdf-export [hidden],#pdf-export img:not([src]),#pdf-export img[src=""]{display:none!important}
 #pdf-export img{max-width:100%}
@@ -1632,10 +1633,11 @@ function prepareWebPrint(){
    const holder=document.createElement('div');holder.innerHTML=card(project);const article=holder.firstElementChild;
    article.querySelectorAll('.editor-only,.admin-actions,button').forEach(el=>el.remove());
    article.querySelectorAll('a').forEach(el=>el.replaceWith(document.createTextNode(el.textContent)));
-   const foot=article.querySelector('.card-foot');if(foot){foot.replaceChildren();const date=document.createElement('span');date.className='micro';date.textContent=project.period||'';const more=document.createElement('span');more.className='text-btn';more.textContent='작품 상세 보기 ↗';foot.append(date,more);}
-   const link=document.createElement('a');link.className='pdf-card-link';link.href=base+'?project='+encodeURIComponent(project.id);link.setAttribute('aria-label',project.title+' 작품 상세 페이지');link.append(article);grid.append(link);
+   const detailURL=base+'?project='+encodeURIComponent(project.id);
+   const foot=article.querySelector('.card-foot');if(foot){foot.replaceChildren();const date=document.createElement('span');date.className='micro';date.textContent=project.period||'';const more=document.createElement('a');more.className='text-btn pdf-project-link';more.href=detailURL;more.textContent='작품 상세 페이지 ↗';foot.append(date,more);}
+   grid.append(article);
   });
-  sheet.append(grid);root.append(sheet);
+  sheet.append(grid);const footer=document.createElement('footer');footer.className='pdf-footer';const webLink=document.createElement('a');webLink.href=base;webLink.textContent='공개 포트폴리오 · '+base;footer.append(webLink);sheet.append(footer);root.append(sheet);
  }
  const statementPage=document.createElement('section');statementPage.className='pdf-page';
  const statementHeader=document.createElement('header');statementHeader.className='pdf-header';
@@ -1650,6 +1652,7 @@ function prepareWebPrint(){
   for(const paragraph of entry.body.split(/\n\s*\n/)){const p=document.createElement('p');p.textContent=paragraph;p.style.marginBottom='16px';article.append(p);}
   statementPage.append(article);
  }
+ const statementFooter=document.createElement('footer');statementFooter.className='pdf-footer';const emailLink=document.createElement('a');emailLink.href='mailto:'+state.profile.email;emailLink.textContent=state.profile.email;const divider=document.createTextNode(' · ');const portfolioLink=document.createElement('a');portfolioLink.href=base;portfolioLink.textContent='공개 포트폴리오';statementFooter.append(emailLink,divider,portfolioLink);statementPage.append(statementFooter);
  root.append(statementPage);
  document.body.append(root);
 }
