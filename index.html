@@ -1423,7 +1423,7 @@ function v31WishReading(p){const rs=p.readingSamples||[];if(rs.length<4)return r
 function v31NewbieStrengths(p){const x=p.v31AwardStrengths;if(!x)return '';
  return `<section class="v31-work-section v31-newbie-strengths"><header><div class="eyebrow">AWARDED WORK · WRITING STRENGTHS</div><h3>${esc(x.title)}</h3><p>${esc(x.intro)}</p></header><div class="v31-strength-grid">${(x.items||[]).map(i=>`<article><h4>${esc(i.name)}</h4><p>${esc(i.detail)}</p><span>${esc(i.ability)}</span></article>`).join('')}</div><p class="v31-source">${esc(x.caveat||'')}</p></section>`;
 }
-function renderV31Wish(p){return `<div class="portfolio-panel v31-wish">${portfolioIntro(p)}${v31WishReading(p)}${workJourney(p)}${v31WishHeroines(p)}${v31MediaCards(p)}${linksHTML(p.workLinks||[])}</div>`;}
+function renderV31Wish(p){const rs=p.readingSamples||[];const game=rs[0]?v31ReadSample(p,rs[0],0):'';const ingame=rs[1]?v31ReadSample(p,rs[1],1):'';const iris=rs[3]?v31ReadSample(p,rs[3],2):'';const mong=rs[2]?v31ReadSample(p,rs[2],3):'';return `<div class="portfolio-panel v31-wish">${portfolioIntro(p)}${workJourney(p)}${v31WishHeroines(p)}${game}${ingame}${v31MediaCards(p)}${iris}${mong}${linksHTML(p.workLinks||[])}</div>`;}
 function renderV31Newbie(p){return `<div class="portfolio-panel v31-newbie">${readingLibrary(p)}</div>`;}
 
 function glitchScenarioWriting(p){
