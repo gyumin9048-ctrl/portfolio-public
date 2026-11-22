@@ -1467,7 +1467,8 @@ function nyangWorkbookSheets(sheets){
 }
 function renderNyangPortfolio(p){
  const sections=(p.nyangPortfolio||[]).map(section=>`<details class="v13-doc-group nyang-work-unit" ${section.open?'open':''}><summary><span><strong>${esc(section.title)}</strong>${section.description?`<small>${esc(section.description)}</small>`:''}</span><span class="v13-disclose">열기 · 접기</span></summary><div class="nyang-work-body">${section.video?videoPanel(p):''}${nyangPages(section.pages,section.title)}${nyangWorkbookSheets(section.workbookSheets)}</div></details>`).join('');
- return `<div class="portfolio-panel nyang-portfolio">${portfolioIntro(p)}${sections}</div>`;
+ const links=linksHTML(p.workLinks||[]);
+ return `<div class="portfolio-panel nyang-portfolio">${portfolioIntro(p)}${sections}${links?`<div class="detail-links">${links}</div>`:''}</div>`;
 }
 function renderRoommatePortfolio(p){
  const evidence=Object.fromEntries((p.teamEvidence||[]).map(x=>[x.title,x]));
