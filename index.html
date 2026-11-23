@@ -987,7 +987,7 @@ if(universityQuest){
  if(questPdf)questPdf.url='downloads/university-survival-quest-plan-20261123.pdf';
  const questPages=universityQuest.teamEvidence?.find(group=>group.title==='퀘스트 기획서')?.pages||[];
  const questPagePaths=['001','004','010','020'];
- questPages.forEach((page,index)=>{if(questPagePaths[index])page.src=`assets/docs/university-quest-20261123-${questPagePaths[index]}.jpg`;});
+ questPages.forEach((page,index)=>{if(questPagePaths[index])page.src=`assets/docs/university-quest-20261124-${questPagePaths[index]}.jpg`;});
 }
 let state=JSON.parse(JSON.stringify(seed));
 if(!config.publicBuild){try{
