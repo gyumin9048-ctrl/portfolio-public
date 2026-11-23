@@ -981,6 +981,14 @@ html.desktop-view,html.desktop-view body{min-width:1280px!important}
 const config=JSON.parse(document.getElementById('app-config').textContent);
 const STORE_KEY='saeya_portfolio_editor_v39-v52';
 const seed=JSON.parse(document.getElementById('app-data').textContent);
+const universityQuest=seed.projects.find(project=>project.id==='university_survival');
+if(universityQuest){
+ const questPdf=universityQuest.workLinks?.find(link=>link.url==='downloads/university-survival-quest-plan.pdf');
+ if(questPdf)questPdf.url='downloads/university-survival-quest-plan-20261123.pdf';
+ const questPages=universityQuest.teamEvidence?.find(group=>group.title==='퀘스트 기획서')?.pages||[];
+ const questPagePaths=['001','004','010','020'];
+ questPages.forEach((page,index)=>{if(questPagePaths[index])page.src=`assets/docs/university-quest-20261123-${questPagePaths[index]}.jpg`;});
+}
 let state=JSON.parse(JSON.stringify(seed));
 if(!config.publicBuild){try{
  const saved=localStorage.getItem(STORE_KEY);
