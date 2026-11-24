@@ -989,10 +989,6 @@ const universityQuest=seed.projects.find(project=>project.id==='university_survi
 if(universityQuest){
  const questPdf=universityQuest.workLinks?.find(link=>link.label==='퀘스트 기획서 링크');
  if(questPdf)questPdf.url='https://drive.google.com/file/d/1MD2KYA-lzy43mexpmuOsZz15V74V8EU8/view?usp=sharing';
- const questPages=universityQuest.teamEvidence?.find(group=>group.title==='퀘스트 기획서')?.pages||[];
- const questPagePaths=['001','004'];
- questPages.splice(2);
- questPages.forEach((page,index)=>{if(questPagePaths[index])page.src=`assets/docs/university-quest-20261124-${questPagePaths[index]}.jpg`;});
 }
 let state=JSON.parse(JSON.stringify(seed));
 if(!config.publicBuild){try{
