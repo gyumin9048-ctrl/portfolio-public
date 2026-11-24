@@ -1440,10 +1440,21 @@ function glitchScenarioWriting(p){
  const x=p.scenarioWriting;if(!x)return '';
   return `<section class="v29-section glitch-scenario-writing"><header><h3>${esc(x.title)}</h3></header><div class="v29-role-block"><ul>${(x.points||[]).map(point=>`<li>${esc(point)}</li>`).join('')}</ul><p>${esc(x.description||'')}</p></div><div class="glitch-writing-gallery">${(x.images||[]).map((src,index)=>`<button type="button" class="study-evidence-image" aria-label="${esc(x.title)} 이미지 ${index+1} 확대"><img loading="lazy" src="${esc(src)}" alt="${esc(x.title)} 이미지 ${index+1}"/></button>`).join('')}</div></section>`;
 }
+function glitchRecoveredScreens(){
+ const screens=[
+  ["씬 연결 구조 · 전체 흐름","assets/glitch-recovered-01.webp"],
+  ["씬 연결 구조 · 대화 흐름 확대","assets/glitch-recovered-02.webp"],
+  ["시나리오·대사·캐릭터 CG 배치","assets/glitch-recovered-03.webp"],
+  ["아이템·퍼즐 설명 텍스트","assets/glitch-recovered-04.webp"],
+  ["선택지와 상호작용 문구","assets/glitch-recovered-05.webp"],
+  ["아이템·퍼즐 설명 텍스트 · 단서 추론","assets/glitch-recovered-06.webp"]
+ ];
+ return `<section class="v29-section glitch-restored-screens"><header><h3>씬·단서 화면</h3></header><div class="glitch-images">${screens.map(([title,src])=>`<article class="glitch-evidence"><div class="caption"><strong>${esc(title)}</strong></div><button type="button" class="v13-image-open study-evidence-image" aria-label="${esc(title)} 확대"><img loading="lazy" src="${esc(src)}" alt="${esc(title)}"/></button></article>`).join('')}</div></section>`;
+}
 function renderGlitchRulesReview(p){
  const schedule=(p.designCards||[]).find(c=>/일정/.test(c.title));
  const [proposal,retrospective]=p.teamEvidence||[];
- return `<div class="portfolio-panel">${portfolioIntro(p)}${proposal?evidenceGroup(proposal):''}${glitchScenarioWriting(p)}
+ return `<div class="portfolio-panel">${portfolioIntro(p)}${proposal?evidenceGroup(proposal):''}${glitchScenarioWriting(p)}${glitchRecoveredScreens()}
  <section class="v29-section v29-leadership">
   <header><h3>팀 리딩</h3></header>
   <section class="v29-role-block"><header><h4>일정·작업 분담 관리</h4><p>담당자별 작업·진행 상태·시작일·종료일 정리.</p></header>${schedule?evidenceFigure({src:schedule.image,caption:'개발 일정표 · 담당자 / 상태 / 작업 기간'}):''}</section>
