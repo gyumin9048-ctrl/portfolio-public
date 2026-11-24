@@ -1421,7 +1421,7 @@ function v31ReadSample(p,a,i){
  const title=p.id==='wish'?String(a.title||'').replace('설정집 특별 단편','특별 단편'):String(a.title||'');
  const open=i===0||i===2; // Game scenario open, in-game closed, Iris open, Mong closed.
  const isPages=kind==='pages'||kind==='captures';
- const docBody=isPages?`<div class="v31-page-sequence" role="group" aria-label="${esc(title)}">${(a.pages||[]).map((src,j)=>`<figure class="v31-page"><img decoding="async" src="${esc(src)}" alt="${esc(title)} ${j+1}"/></figure>`).join('')}</div>`:(i===0?`<div class="v31-script-lines">${sourceScriptLines(a)}</div>`:`<pre class="v31-source-script">${esc(a.content||'')}</pre>`);
+ const docBody=isPages?`<div class="v31-page-sequence" role="group" aria-label="${esc(title)}">${(a.pages||[]).map((src,j)=>`<figure class="v31-page"><img loading="lazy" decoding="async" src="${esc(src)}" alt="${esc(title)} ${j+1}"/></figure>`).join('')}</div>`:(i===0?`<div class="v31-script-lines">${sourceScriptLines(a)}</div>`:`<pre class="v31-source-script">${esc(a.content||'')}</pre>`);
   const content=i===0?`<section class="portfolio-read-library"><section class="reading-sample"><header><h4>${esc(title)}</h4><p>${esc(a.intro||'')}</p></header><div class="reading-scroll" tabindex="0" role="region" aria-label="${esc(title)} 읽기 영역">${docBody}</div></section></section>`:`<details class="v31-read-unit v31-fold" ${open?'open':''}><summary><span class="v31-summary-copy"><strong>${esc(title)}</strong><small>${esc(a.intro||'')}</small></span><span class="v31-arrow" aria-hidden="true"></span></summary><div class="v31-fold-body ${isPages?'v31-image-pages':''}">${docBody}</div></details>`;
  return content;
 }
