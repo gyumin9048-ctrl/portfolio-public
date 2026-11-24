@@ -1490,7 +1490,7 @@ function renderRoommatePortfolio(p){
 }
 function renderUniversityPortfolio(p){
  const documents=(p.teamEvidence||[]).filter(x=>x.title==='게임 스토리 기획서'||x.title==='퀘스트 기획서'||x.title==='NPC 테이블 · 맵 상호작용 대상 정리').map(evidenceGroup).join('');
- return `<div class="portfolio-panel university-full-portfolio">${portfolioIntro(p)}${universityPortfolio(p)}${documents}${readingLibrary(p)}<div class="detail-links">${linksHTML(p.workLinks||[])}</div></div>`;
+ return `<div class="portfolio-panel university-full-portfolio">${portfolioIntro(p)}${universityPortfolio(p)}${documents}${readingLibrary(p)}</div>`;
 }
 function renderPortfolioPanel(p){
  if(p.id==='nyangnyang_survival')return renderNyangPortfolio(p);
